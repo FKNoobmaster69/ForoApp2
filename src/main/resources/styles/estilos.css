@@ -1,0 +1,58 @@
+/* Estilos JavaFX estilo iOS + Twitter + Reddit sin variables */
+
+.login-root {
+    -fx-background-color: #F8F9FA;
+    -fx-padding: 24;
+    -fx-font-family: "SF Pro Text", "Segoe UI", system-ui, sans-serif;
+}
+
+.login-title {
+    -fx-font-size: 26px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #0F1419;
+}
+
+.login-field {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 16;
+    -fx-border-radius: 16;
+    -fx-border-color: #E1E8ED;
+    -fx-border-width: 1;
+    -fx-padding: 12 16;
+    -fx-font-size: 16px;
+    -fx-pref-width: 320;
+    -fx-text-fill: #0F1419;
+}
+
+.login-button {
+    -fx-background-color: #1DA1F2;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 16px;
+    -fx-background-radius: 18;
+    -fx-padding: 10 20;
+    -fx-pref-width: 220;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 8, 0, 0, 2);
+}
+
+.register-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: #1DA1F2;
+    -fx-font-weight: bold;
+    -fx-font-size: 15px;
+}
+
+.error-label {
+    -fx-text-fill: #E0245E;
+    -fx-font-size: 13px;
+}
+
+.list-view, .text-area {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #E1E8ED;
+    -fx-border-radius: 12;
+    -fx-background-radius: 12;
+    -fx-padding: 10;
+    -fx-font-size: 15px;
+    -fx-text-fill: #0F1419;
+}

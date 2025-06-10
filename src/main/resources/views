@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.foroapp2.controllers.LoginController">
+    <children>
+        <VBox spacing="10" alignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+              AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0">
+            <padding><Insets top="50" left="20" right="20" bottom="50"/></padding>
+            <Label text="Iniciar Sesión" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+            <TextField fx:id="usuarioField" promptText="Nombre de usuario" maxWidth="300"/>
+            <PasswordField fx:id="contrasenaField" promptText="Contraseña" maxWidth="300"/>
+            <Button text="Entrar" onAction="#iniciarSesion" maxWidth="200"/>
+            <Label fx:id="mensajeError" textFill="red"/>
+        </VBox>
+    </children>
+</AnchorPane>

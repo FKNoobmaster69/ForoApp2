@@ -1,0 +1,12 @@
+[
+  {
+    "id": 1,
+    "nombre": "testuser",
+    "contrasena": "password123",
+    "email": "test@foro.com",
+    "descripcion": "",
+    "redesSociales": "",
+    "fechaNacimiento": "2000-01-01",
+    "genero": "MASCULINO"
+  }
+]

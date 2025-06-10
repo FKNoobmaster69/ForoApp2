@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.foroapp2.controllers.PrincipalController"
+            stylesheets="@/styles/estilos.css"
+            styleClass="login-root"
+            prefWidth="800" prefHeight="600">
+
+    <top>
+        <HBox spacing="10" alignment="CENTER_LEFT" styleClass="login-field" padding="10">
+            <Label text="Bienvenido," styleClass="login-title"/>
+            <Label fx:id="welcomeLabel" styleClass="login-title"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Button fx:id="newPostButton" text="Crear Post" styleClass="login-button"/>
+            <Button fx:id="logoutButton" text="Cerrar Sesión" styleClass="register-button"/>
+        </HBox>
+    </top>
+
+    <center>
+        <ScrollPane fitToWidth="true">
+            <VBox fx:id="postContainer" spacing="15" padding="15"/>
+        </ScrollPane>
+    </center>
+</BorderPane>
