@@ -1,19 +1,41 @@
 [ {
   "id" : 1,
   "nombre" : "testuser",
-  "email" : "test@foro.com",
   "contrasena" : "password123",
+  "email" : "test@foro.com",
   "descripcion" : "",
-  "redesSociales" : "",
+  "genero" : "MASCULINO",
   "fechaNacimiento" : "2000-01-01",
-  "genero" : "MASCULINO"
+  "redesSociales" : { },
+  "comunidades" : [ ],
+  "posts" : [ {
+    "id" : null,
+    "titulo" : "rata ",
+    "contenido" : "trampa",
+    "autor" : "testuser",
+    "comunidad" : null,
+    "fechaCreacion" : "2025-06-10 23:49:11",
+    "likes" : 0,
+    "dislikes" : 0
+  }, {
+    "id" : null,
+    "titulo" : "wawa",
+    "contenido" : "xddddd",
+    "autor" : "testuser",
+    "comunidad" : null,
+    "fechaCreacion" : "2025-06-10 23:51:27",
+    "likes" : 0,
+    "dislikes" : 0
+  } ]
 }, {
   "id" : 2,
   "nombre" : "1234",
-  "email" : "1234@gmai.com",
   "contrasena" : "1234",
+  "email" : "1234@gmai.com",
   "descripcion" : "1234",
-  "redesSociales" : "1234",
+  "genero" : "MASCULINO",
   "fechaNacimiento" : "2001-06-14",
-  "genero" : "MASCULINO"
+  "redesSociales" : { },
+  "comunidades" : [ ],
+  "posts" : [ ]
 } ]

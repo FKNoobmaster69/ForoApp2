@@ -1,54 +1,76 @@
 package com.example.foroapp2.controllers;
 
 import com.example.foroapp2.models.Usuario;
-import com.example.foroapp2.services.UsuarioService;
-import com.example.foroapp2.utils.SceneManager;
-import com.example.foroapp2.utils.SessionManager;
+import com.example.foroapp2.utils.JsonFileUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
-import java.util.Optional;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class LoginController {
 
-    @FXML private TextField emailField;
-    @FXML private PasswordField passwordField;
-    @FXML private Label mensajeErrorLabel;
+    @FXML
+    private TextField txtUsuario;
 
-    private final UsuarioService usuarioService = new UsuarioService();
+    @FXML
+    private PasswordField txtPassword;
+
+    private List<Usuario> usuarios = new ArrayList<>();
 
     @FXML
     public void initialize() {
-        // Inicializar campos y limpiar mensajes de error
-        mensajeErrorLabel.setText("");
+        JsonFileUtils.cargarListaDesdeArchivo("data/usuarios.json", Usuario[].class)
+                .ifPresentOrElse(
+                        lista -> usuarios = lista,
+                        () -> usuarios = new ArrayList<>()
+                );
     }
 
     @FXML
-    private void iniciarSesion(ActionEvent event) {
-        String email = emailField.getText().trim();
-        String password = passwordField.getText();
+    void onLogin(ActionEvent event) throws IOException {
+        String nombre = txtUsuario.getText().trim();
+        String clave = txtPassword.getText().trim();
 
-        if (email.isEmpty() || password.isEmpty()) {
-            mensajeErrorLabel.setText("Por favor, completa todos los campos");
-            return;
+        for (Usuario usuario : usuarios) {
+            if (usuario.getNombre().equalsIgnoreCase(nombre) && usuario.getContrasena().equals(clave)) {
+                Stage stage = (Stage) txtUsuario.getScene().getWindow();
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/foroapp2/principal.fxml"));
+                Parent root = loader.load();
+
+                PrincipalController controller = loader.getController();
+                controller.setUsuarioActual(usuario);
+                controller.setUsuarios(usuarios);
+                controller.init();
+
+                Scene scene = new Scene(root);
+                stage.setScene(scene);
+                stage.setTitle("ForoApp - Principal");
+                stage.setMaximized(true);
+                stage.show();
+                return;
+            }
         }
 
-        Optional<Usuario> usuarioOptional = usuarioService.validarCredenciales(email, password);
-
-        if (usuarioOptional.isPresent()) {
-            Usuario usuario = usuarioOptional.get();
-            SessionManager.iniciarSesion(usuario);
-            SceneManager.cambiarEscena("principal.fxml");
-        } else {
-            mensajeErrorLabel.setText("Email o contraseña incorrectos");
-        }
+        txtUsuario.setStyle("-fx-border-color: red;");
+        txtPassword.setStyle("-fx-border-color: red;");
     }
 
     @FXML
-    private void irARegistro(ActionEvent event) {
-        SceneManager.cambiarEscena("registro.fxml");
+    void onRegister(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/foroapp2/registro.fxml"));
+        Parent root = loader.load();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.setTitle("ForoApp - Registrar nuevo usuario");
+        stage.setResizable(false);
+        stage.show();
     }
 }

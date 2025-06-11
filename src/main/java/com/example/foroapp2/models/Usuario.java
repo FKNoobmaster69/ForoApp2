@@ -1,10 +1,8 @@
 package com.example.foroapp2.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Usuario {
 
@@ -14,24 +12,27 @@ public class Usuario {
     private String email;
     private String descripcion;
     private Genero genero;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate fechaNacimiento;
+
     private Map<String, String> redesSociales;
     private List<Comunidad> comunidades;
+    private List<Post> posts;
 
     public Usuario() {
         this.redesSociales = new HashMap<>();
-        this.comunidades  = new ArrayList<>();
+        this.comunidades = new ArrayList<>();
+        this.posts = new ArrayList<>();
     }
 
     public Usuario(String nombre, String email, String contrasena, Genero genero) {
         this();
-        this.nombre      = nombre;
-        this.email       = email;
-        this.contrasena  = contrasena;
-        this.genero      = genero;
+        this.nombre = nombre;
+        this.email = email;
+        this.contrasena = contrasena;
+        this.genero = genero;
     }
-
-
 
     public long getId() { return id; }
     public void setId(long id) { this.id = id; }
@@ -60,6 +61,8 @@ public class Usuario {
     public List<Comunidad> getComunidades() { return comunidades; }
     public void setComunidades(List<Comunidad> comunidades) { this.comunidades = comunidades; }
 
+    public List<Post> getPosts() { return posts; }
+    public void setPosts(List<Post> posts) { this.posts = posts; }
 
     public void agregarComunidad(Comunidad comunidad) {
         if (!comunidades.contains(comunidad)) {

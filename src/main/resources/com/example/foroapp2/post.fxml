@@ -1,23 +1,14 @@
+
 <?xml version="1.0" encoding="UTF-8"?>
-
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.control.*?>
-
-<VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.example.foroapp2.controllers.PostController"
-      stylesheets="@/styles/estilos.css"
-      styleClass="login-root"
-      spacing="10" alignment="TOP_LEFT" prefWidth="600" prefHeight="400">
-
-    <children>
-        <Label fx:id="tituloLabel" styleClass="login-title"/>
-        <Label fx:id="autorLabel" styleClass="error-label"/>
-        <TextArea fx:id="contenidoArea" editable="false" wrapText="true" styleClass="login-field"/>
-        <HBox spacing="15">
-            <Button fx:id="likeButton" text="👍" styleClass="login-button"/>
-            <Button fx:id="dislikeButton" text="👎" styleClass="login-button"/>
-        </HBox>
-    </children>
-
-    <padding><Insets top="20" left="20" right="20" bottom="20"/></padding>
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.foroapp2.controllers.PostController" spacing="10" alignment="TOP_LEFT" prefWidth="600" prefHeight="400">
+    <Label fx:id="tituloLabel" styleClass="login-title"/>
+    <Label fx:id="autorLabel"/>
+    <TextArea fx:id="contenidoArea" editable="false" wrapText="true"/>
+    <HBox spacing="15">
+        <Button fx:id="likeButton" text="👍"/>
+        <Button fx:id="dislikeButton" text="👎"/>
+    </HBox>
 </VBox>

@@ -25,10 +25,14 @@ public class Comunidad {
         this.nombre      = nombre;
         this.descripcion = descripcion;
         this.creador     = creador;
-        this.miembros.add(creador);   // El creador es miembro por defecto
+        this.miembros.add(creador);
     }
 
-
+    public Comunidad(Long id, String nombre) {
+        this();
+        this.id = id;
+        this.nombre = nombre;
+    }
 
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
@@ -49,8 +53,6 @@ public class Comunidad {
 
     public List<Usuario> getMiembros() { return miembros; }
     public void setMiembros(List<Usuario> miembros) { this.miembros = miembros; }
-
-
 
     public void agregarTema(Tema tema) {
         if (!temas.contains(tema)) temas.add(tema);

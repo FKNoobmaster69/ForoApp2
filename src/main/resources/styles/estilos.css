@@ -1,146 +1,113 @@
-/* Estilos JavaFX estilo iOS + Twitter + Reddit sin variables */
-
-.login-root {
-    -fx-background-color: #F8F9FA;
-    -fx-padding: 24;
-    -fx-font-family: "SF Pro Text", "Segoe UI", system-ui, sans-serif;
+/* Fondo general y tipografía */
+.root {
+    -fx-background-color: #F5F8FA;
+    -fx-font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    -fx-text-fill: #14171A;
+    -fx-font-size: 18px; /* letras más grandes para todo */
 }
 
-.login-title {
-    -fx-font-size: 26px;
+/* Títulos */
+.login-title, .title {
+    -fx-font-size: 36px; /* tamaño grande para títulos */
     -fx-font-weight: bold;
-    -fx-text-fill: #0F1419;
+    -fx-text-fill: #14171A;
 }
 
-.login-field {
-    -fx-background-color: #FFFFFF;
-    -fx-background-radius: 16;
-    -fx-border-radius: 16;
-    -fx-border-color: #E1E8ED;
-    -fx-border-width: 1;
-    -fx-padding: 12 16;
-    -fx-font-size: 16px;
-    -fx-pref-width: 320;
-    -fx-text-fill: #0F1419;
+.subtitle {
+    -fx-font-size: 28px;
+    -fx-font-weight: 600;
+    -fx-text-fill: #657786;
 }
 
-.login-button {
+/* Botón primario estilo Twitter */
+.button {
     -fx-background-color: #1DA1F2;
     -fx-text-fill: white;
+    -fx-font-size: 18px; /* letras grandes */
     -fx-font-weight: bold;
-    -fx-font-size: 16px;
-    -fx-background-radius: 18;
-    -fx-padding: 10 20;
-    -fx-pref-width: 220;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 8, 0, 0, 2);
+    -fx-background-radius: 20; /* más redondeado */
+    -fx-padding: 12 40; /* más grande y cómodo */
+    -fx-cursor: hand;
 }
 
-.register-button {
-    -fx-background-color: transparent;
-    -fx-text-fill: #1DA1F2;
-    -fx-font-weight: bold;
-    -fx-font-size: 15px;
+/* Hover para primario */
+.button:hover {
+    -fx-background-color: #0d8ddb;
 }
 
-.error-label {
-    -fx-text-fill: #E0245E;
-    -fx-font-size: 13px;
-}
-/* Estilos generales */
-.login-root {
-    -fx-background-color: #f4f7f9;
-    -fx-font-family: 'Segoe UI', Arial, sans-serif;
-}
-
-.login-title {
-    -fx-font-size: 24px;
-    -fx-font-weight: bold;
-    -fx-text-fill: #2c3e50;
-    -fx-padding: 0 0 10 0;
-}
-
-.login-field {
-    -fx-pref-height: 40px;
+/* Botón secundario estilo Reddit */
+.button.secondary {
     -fx-background-color: white;
-    -fx-background-radius: 5px;
-    -fx-border-color: #e1e8ed;
-    -fx-border-radius: 5px;
-    -fx-padding: 5px 10px;
-    -fx-font-size: 14px;
+    -fx-border-color: #FF4500;
+    -fx-border-width: 2;
+    -fx-text-fill: #FF4500;
+    -fx-font-size: 18px;
+    -fx-background-radius: 20;
+    -fx-padding: 10 36;
+    -fx-cursor: hand;
 }
 
-.login-button {
-    -fx-background-color: #3498db;
+.button.secondary:hover {
+    -fx-background-color: #FF4500;
     -fx-text-fill: white;
-    -fx-font-weight: bold;
-    -fx-background-radius: 5px;
-    -fx-cursor: hand;
-    -fx-pref-height: 40px;
-    -fx-min-width: 100px;
 }
 
-.login-button:hover {
-    -fx-background-color: #2980b9;
-}
-
-.register-button {
-    -fx-background-color: transparent;
-    -fx-text-fill: #3498db;
-    -fx-border-color: #3498db;
-    -fx-border-radius: 5px;
-    -fx-cursor: hand;
-    -fx-pref-height: 40px;
-    -fx-min-width: 100px;
-}
-
-.register-button:hover {
-    -fx-background-color: #ecf0f1;
-}
-
-.error-label {
-    -fx-text-fill: #e74c3c;
-    -fx-font-size: 14px;
-}
-
-/* Estilos para la pantalla principal */
-.post-card {
+/* Campos de texto y áreas */
+.text-field, .password-field, .text-area {
     -fx-background-color: white;
-    -fx-background-radius: 8px;
-    -fx-border-radius: 8px;
-    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 8, 0, 0, 4);
-    -fx-padding: 15px;
+    -fx-border-color: #E1E8ED;
+    -fx-border-radius: 8; /* bordes más redondeados */
+    -fx-background-radius: 8;
+    -fx-padding: 12 16;
+    -fx-font-size: 18px;
+}
+
+.text-field:focused, .password-field:focused, .text-area:focused {
+    -fx-border-color: #1DA1F2;
+}
+
+/* Tarjetas de post */
+.post-card, .pane {
+    -fx-background-color: white;
+    -fx-background-radius: 16;
+    -fx-padding: 24;
+    -fx-border-color: #E1E8ED;
+    -fx-border-radius: 16;
+}
+
+/* Chip de tag */
+.tag-chip {
+    -fx-background-color: #1DA1F2;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-padding: 6 12;
+    -fx-background-radius: 16;
+}
+
+/* Autor y contenido */
+.post-author {
+    -fx-font-size: 14px;
+    -fx-text-fill: #657786;
 }
 
 .post-title {
-    -fx-font-size: 18px;
-    -fx-font-weight: bold;
-    -fx-text-fill: #2c3e50;
-}
-
-.post-author {
-    -fx-font-size: 14px;
-    -fx-text-fill: #7f8c8d;
+    -fx-font-size: 24px;
+    -fx-font-weight: 600;
 }
 
 .post-content {
-    -fx-font-size: 14px;
-    -fx-text-fill: #34495e;
-    -fx-wrap-text: true;
+    -fx-font-size: 18px;
+    -fx-text-fill: #14171A;
 }
 
-.tag-chip {
-    -fx-background-color: #ecf0f1;
-    -fx-background-radius: 15px;
-    -fx-padding: 5px 10px;
-    -fx-text-fill: #2980b9;
-    -fx-font-size: 12px;
-}
-.list-view, .text-area {
-    -fx-background-color: #FFFFFF;
+/* Listas */
+.list-view {
+    -fx-control-inner-background: white;
     -fx-border-color: #E1E8ED;
-    -fx-border-radius: 12;
-    -fx-background-radius: 12;
-    -fx-padding: 10;
-    -fx-font-size: 15px;
-    -fx-text-fill: #0F1419;
+    -fx-border-radius: 8;
+}
+
+/* Layouts generales */
+.vbox, .hbox {
+    -fx-spacing: 16;
 }

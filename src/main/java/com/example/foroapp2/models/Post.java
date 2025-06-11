@@ -1,30 +1,33 @@
 package com.example.foroapp2.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.time.LocalDateTime;
 
 public class Post {
+
     private Long id;
     private String titulo;
     private String contenido;
-    private Usuario autor;
+    private String autor;
     private Comunidad comunidad;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime fechaCreacion;
+
     private int likes;
     private int dislikes;
 
-    public Post() {
-        this.fechaCreacion = LocalDateTime.now();
-        this.likes = 0;
-        this.dislikes = 0;
-    }
+    public Post() {}
 
-    public Post(String titulo, String contenido, Usuario autor, Comunidad comunidad) {
-        this();
+    public Post(String titulo, String contenido, String autor, Comunidad comunidad) {
         this.titulo = titulo;
         this.contenido = contenido;
         this.autor = autor;
         this.comunidad = comunidad;
+        this.fechaCreacion = LocalDateTime.now();
+        this.likes = 0;
+        this.dislikes = 0;
     }
 
     public Long getId() {
@@ -51,11 +54,11 @@ public class Post {
         this.contenido = contenido;
     }
 
-    public Usuario getAutor() {
+    public String getAutor() {
         return autor;
     }
 
-    public void setAutor(Usuario autor) {
+    public void setAutor(String autor) {
         this.autor = autor;
     }
 
@@ -93,14 +96,6 @@ public class Post {
 
     @Override
     public String toString() {
-        return "Post{" +
-                "id=" + id +
-                ", titulo='" + titulo + '\'' +
-                ", autor=" + (autor != null ? autor.getNombre() : "desconocido") +
-                ", comunidad=" + (comunidad != null ? comunidad.getNombre() : "ninguna") +
-                ", fecha=" + fechaCreacion +
-                ", likes=" + likes +
-                ", dislikes=" + dislikes +
-                '}';
+        return titulo + " - " + autor;
     }
 }

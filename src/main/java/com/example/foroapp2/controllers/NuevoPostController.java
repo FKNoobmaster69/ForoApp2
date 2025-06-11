@@ -1,48 +1,46 @@
 package com.example.foroapp2.controllers;
 
-import com.example.foroapp2.models.Comunidad;
 import com.example.foroapp2.models.Post;
 import com.example.foroapp2.models.Usuario;
-import com.example.foroapp2.services.PostService;
-import com.example.foroapp2.utils.SceneManager;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
+import java.util.function.Consumer;
+
 public class NuevoPostController {
 
-    @FXML private TextField tituloField;
-    @FXML private TextArea  contenidoArea;
-    @FXML private Button    guardarButton;
-    @FXML private Button    cancelarButton;
+    @FXML
+    private TextField txtTitulo;
 
-    private final PostService postService = new PostService();
-    private Usuario    usuarioActual;
-    private Comunidad  comunidadActual;
+    @FXML
+    private TextArea txtContenido;
 
-    public void setContext(Usuario usuario, Comunidad comunidad) {
-        this.usuarioActual   = usuario;
-        this.comunidadActual = comunidad;
+    @FXML
+    private Button btnCrear;
+
+    private Usuario usuarioActual;
+    private Consumer<Post> postCreadoCallback;
+
+    public void setUsuarioActual(Usuario usuario) {
+        this.usuarioActual = usuario;
+    }
+
+    public void setPostCreadoCallback(Consumer<Post> callback) {
+        this.postCreadoCallback = callback;
     }
 
     @FXML
-    private void guardarPost() {
-        String titulo    = tituloField.getText().trim();
-        String contenido = contenidoArea.getText().trim();
-        if (!titulo.isEmpty() && !contenido.isEmpty()) {
-            Post post = new Post();
-            post.setTitulo(titulo);
-            post.setContenido(contenido);
-            post.setAutor(usuarioActual);
-            post.setComunidad(comunidadActual);
-            postService.crearPost(post);
-            SceneManager.cambiarEscena("main-view.fxml");
+    private void crearPost() {
+        String titulo = txtTitulo.getText();
+        String contenido = txtContenido.getText();
+
+        if (titulo != null && !titulo.isBlank() && contenido != null && !contenido.isBlank()) {
+            Post nuevoPost = new Post(titulo, contenido, usuarioActual.getNombre(), null);
+            if (postCreadoCallback != null) {
+                postCreadoCallback.accept(nuevoPost);
+            }
         }
-    }
-
-    @FXML
-    private void cancelar() {
-        SceneManager.cambiarEscena("main-view.fxml");
     }
 }

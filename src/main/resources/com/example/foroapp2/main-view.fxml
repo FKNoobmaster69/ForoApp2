@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.control.*?>
 
-<BorderPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+<BorderPane xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.example.foroapp2.controllers.MainController"
-            stylesheets="@/styles/estilos.css"
-            styleClass="login-root"
-            prefWidth="800" prefHeight="600">
+            prefWidth="800"
+            prefHeight="600">
 
     <top>
-        <Label text="ForoApp - Inicio" styleClass="login-title" BorderPane.alignment="CENTER"/>
+        <Label text="ForoApp - Inicio" styleClass="login-title"
+               BorderPane.alignment="CENTER"/>
     </top>
 
     <left>
-        <VBox spacing="10" styleClass="login-field" padding="10">
+        <VBox spacing="10" padding="10">
             <Label text="Comunidades" styleClass="login-title"/>
             <ListView fx:id="comunidadList"/>
         </VBox>
@@ -28,13 +29,15 @@
     </center>
 
     <right>
-        <VBox spacing="10" styleClass="login-field" padding="10">
+        <VBox spacing="10" padding="10">
             <Label text="Detalle" styleClass="login-title"/>
             <TextArea fx:id="detallePost" editable="false" wrapText="true"/>
         </VBox>
     </right>
 
     <bottom>
-        <Button fx:id="onRefresh" text="Refrescar" onAction="#onRefresh" styleClass="login-button" BorderPane.alignment="CENTER"/>
+        <Button text="Refrescar" onAction="#onRefresh"
+                BorderPane.alignment="CENTER"/>
     </bottom>
+
 </BorderPane>

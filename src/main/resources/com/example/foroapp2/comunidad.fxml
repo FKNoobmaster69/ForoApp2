@@ -1,22 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
 
-<VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+<VBox xmlns="http://javafx.com/javafx/17"
+      xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="com.example.foroapp2.controllers.ComunidadController"
+      spacing="15"
+      alignment="TOP_CENTER"
+      prefWidth="400"
+      prefHeight="600"
       stylesheets="@/styles/estilos.css"
-      styleClass="login-root"
-      spacing="15" alignment="TOP_CENTER" prefWidth="400" prefHeight="600">
-    <children>
-        <Label text="Comunidades" styleClass="login-title"/>
-        <ListView fx:id="comunidadesListView" styleClass="login-field" prefHeight="400"/>
+      styleClass="pane">
 
-        <HBox spacing="10">
-            <TextField fx:id="nuevaComunidadField" promptText="Nueva comunidad" styleClass="login-field" HBox.hgrow="ALWAYS"/>
-            <Button text="Crear" onAction="#crearComunidad" styleClass="login-button"/>
-        </HBox>
-    </children>
-    <padding><Insets top="20" left="20" right="20" bottom="20"/></padding>
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <Label text="Comunidades" styleClass="login-title"/>
+
+    <ListView fx:id="comunidadList" prefHeight="400" styleClass="list-view"/>
+
+    <HBox spacing="10" alignment="CENTER">
+        <TextField fx:id="nuevoComunidadField"
+                   promptText="Nuevo nombre de comunidad"
+                   HBox.hgrow="ALWAYS"
+                   styleClass="text-field"/>
+        <Button text="Agregar"
+                onAction="#crearComunidad"
+                styleClass="button secondary"/>
+    </HBox>
+
 </VBox>

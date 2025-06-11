@@ -1,8 +1,10 @@
 package com.example.foroapp2.services;
 
+import com.example.foroapp2.models.Comunidad;
 import com.example.foroapp2.models.Post;
 import com.example.foroapp2.repositories.PostRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -17,11 +19,11 @@ public class PostService {
 
     public List<Post> listarPorComunidad(long comunidadId) {
         return repository.listarTodos()
-                         .stream()
-                         .filter(p -> p.getComunidad() != null
-                                   && p.getComunidad().getId() != null
-                                   && p.getComunidad().getId() == comunidadId)
-                         .collect(Collectors.toList());
+                .stream()
+                .filter(p -> p.getComunidad() != null
+                        && p.getComunidad().getId() != null
+                        && p.getComunidad().getId() == comunidadId)
+                .collect(Collectors.toList());
     }
 
     public Optional<Post> buscarPorId(long id) {
@@ -40,8 +42,6 @@ public class PostService {
         return repository.eliminar(id);
     }
 
-    /* ==== nueva funcionalidad de calificación ============================================ */
-
     public void calificar(long postId, boolean positivo) {
         buscarPorId(postId).ifPresent(post -> {
             if (positivo) {
@@ -51,5 +51,18 @@ public class PostService {
             }
             repository.actualizar(post);
         });
+    }
+
+    public List<Post> generarPostsRandom() {
+        List<Post> posts = new ArrayList<>();
+        Comunidad comunidadDefault = null;
+
+        posts.add(new Post("Dato curioso 1", "El sol es una estrella de tipo espectral G2V.", "Admin", comunidadDefault));
+        posts.add(new Post("Dato curioso 2", "El corazón humano late alrededor de 100,000 veces al día.", "Admin", comunidadDefault));
+        posts.add(new Post("Dato curioso 3", "La Gran Muralla China mide más de 21,000 km de largo.", "Admin", comunidadDefault));
+        posts.add(new Post("Dato curioso 4", "El récord mundial de salto con pértiga es 6.18 metros.", "Admin", comunidadDefault));
+        posts.add(new Post("Dato curioso 5", "La luz tarda aproximadamente 8 minutos en llegar del Sol a la Tierra.", "Admin", comunidadDefault));
+
+        return posts;
     }
 }

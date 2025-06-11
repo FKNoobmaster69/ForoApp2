@@ -5,8 +5,12 @@
     "contrasena": "password123",
     "email": "test@foro.com",
     "descripcion": "",
-    "redesSociales": "",
+    "redesSociales": {
+      "instagram": "@testuser"
+    },
     "fechaNacimiento": "2000-01-01",
-    "genero": "MASCULINO"
+    "genero": "MASCULINO",
+    "comunidades": [],
+    "posts": []
   }
 ]
