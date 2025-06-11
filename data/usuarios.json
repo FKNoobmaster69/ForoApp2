@@ -1,0 +1,19 @@
+[ {
+  "id" : 1,
+  "nombre" : "testuser",
+  "email" : "test@foro.com",
+  "contrasena" : "password123",
+  "descripcion" : "",
+  "redesSociales" : "",
+  "fechaNacimiento" : "2000-01-01",
+  "genero" : "MASCULINO"
+}, {
+  "id" : 2,
+  "nombre" : "1234",
+  "email" : "1234@gmai.com",
+  "contrasena" : "1234",
+  "descripcion" : "1234",
+  "redesSociales" : "1234",
+  "fechaNacimiento" : "2001-06-14",
+  "genero" : "MASCULINO"
+} ]

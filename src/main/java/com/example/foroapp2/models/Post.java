@@ -1,6 +1,7 @@
 package com.example.foroapp2.models;
 
-import java.util.List;
+
+import java.time.LocalDateTime;
 
 public class Post {
     private Long id;
@@ -8,19 +9,22 @@ public class Post {
     private String contenido;
     private Usuario autor;
     private Comunidad comunidad;
-    private List<Tag> tags;
+    private LocalDateTime fechaCreacion;
     private int likes;
     private int dislikes;
 
-    public Post() {}
+    public Post() {
+        this.fechaCreacion = LocalDateTime.now();
+        this.likes = 0;
+        this.dislikes = 0;
+    }
 
     public Post(String titulo, String contenido, Usuario autor, Comunidad comunidad) {
+        this();
         this.titulo = titulo;
         this.contenido = contenido;
         this.autor = autor;
         this.comunidad = comunidad;
-        this.likes = 0;
-        this.dislikes = 0;
     }
 
     public Long getId() {
@@ -63,12 +67,12 @@ public class Post {
         this.comunidad = comunidad;
     }
 
-    public List<Tag> getTags() {
-        return tags;
+    public LocalDateTime getFechaCreacion() {
+        return fechaCreacion;
     }
 
-    public void setTags(List<Tag> tags) {
-        this.tags = tags;
+    public void setFechaCreacion(LocalDateTime fechaCreacion) {
+        this.fechaCreacion = fechaCreacion;
     }
 
     public int getLikes() {
@@ -85,5 +89,18 @@ public class Post {
 
     public void setDislikes(int dislikes) {
         this.dislikes = dislikes;
+    }
+
+    @Override
+    public String toString() {
+        return "Post{" +
+                "id=" + id +
+                ", titulo='" + titulo + '\'' +
+                ", autor=" + (autor != null ? autor.getNombre() : "desconocido") +
+                ", comunidad=" + (comunidad != null ? comunidad.getNombre() : "ninguna") +
+                ", fecha=" + fechaCreacion +
+                ", likes=" + likes +
+                ", dislikes=" + dislikes +
+                '}';
     }
 }

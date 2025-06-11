@@ -13,22 +13,22 @@ import javafx.scene.control.TextField;
 public class NuevoPostController {
 
     @FXML private TextField tituloField;
-    @FXML private TextArea contenidoArea;
-    @FXML private Button guardarButton;
-    @FXML private Button cancelarButton;
+    @FXML private TextArea  contenidoArea;
+    @FXML private Button    guardarButton;
+    @FXML private Button    cancelarButton;
 
     private final PostService postService = new PostService();
-    private Usuario usuarioActual;
-    private Comunidad comunidadActual;
+    private Usuario    usuarioActual;
+    private Comunidad  comunidadActual;
 
     public void setContext(Usuario usuario, Comunidad comunidad) {
-        this.usuarioActual = usuario;
+        this.usuarioActual   = usuario;
         this.comunidadActual = comunidad;
     }
 
     @FXML
     private void guardarPost() {
-        String titulo = tituloField.getText().trim();
+        String titulo    = tituloField.getText().trim();
         String contenido = contenidoArea.getText().trim();
         if (!titulo.isEmpty() && !contenido.isEmpty()) {
             Post post = new Post();
@@ -36,13 +36,13 @@ public class NuevoPostController {
             post.setContenido(contenido);
             post.setAutor(usuarioActual);
             post.setComunidad(comunidadActual);
-            postService.guardar(post);
-            SceneManager.cambiarEscena("main.fxml");
+            postService.crearPost(post);
+            SceneManager.cambiarEscena("main-view.fxml");
         }
     }
 
     @FXML
     private void cancelar() {
-        SceneManager.cambiarEscena("main.fxml");
+        SceneManager.cambiarEscena("main-view.fxml");
     }
 }

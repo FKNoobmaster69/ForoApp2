@@ -7,17 +7,18 @@ import java.util.List;
 import java.util.Optional;
 
 public class TemaService {
+
     private final TemaRepository repository = new TemaRepository();
 
     public List<Tema> listarTodos() {
         return repository.listarTodos();
     }
 
-    public Optional<Tema> buscarPorId(long id) {
+    public Optional<Tema> buscarPorId(Long id) {
         return repository.buscarPorId(id);
     }
 
-    public List<Tema> listarPorComunidad(long comunidadId) {
+    public List<Tema> buscarPorComunidadId(Long comunidadId) {
         return repository.buscarPorComunidadId(comunidadId);
     }
 
@@ -25,19 +26,11 @@ public class TemaService {
         repository.guardar(tema);
     }
 
-    public boolean actualizarTema(Tema tema) {
-        return repository.buscarPorId(tema.getId())
-                .map(t -> {
-                    repository.actualizar(tema);
-                    return true;
-                }).orElse(false);
+    public void actualizarTema(Tema tema) {
+        repository.actualizar(tema);
     }
 
-    public boolean eliminarTema(long id) {
-        return repository.buscarPorId(id)
-                .map(t -> {
-                    repository.eliminar(id);
-                    return true;
-                }).orElse(false);
+    public void eliminarTema(Long id) {
+        repository.eliminar(id);
     }
 }

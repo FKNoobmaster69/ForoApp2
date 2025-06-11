@@ -46,7 +46,95 @@
     -fx-text-fill: #E0245E;
     -fx-font-size: 13px;
 }
+/* Estilos generales */
+.login-root {
+    -fx-background-color: #f4f7f9;
+    -fx-font-family: 'Segoe UI', Arial, sans-serif;
+}
 
+.login-title {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2c3e50;
+    -fx-padding: 0 0 10 0;
+}
+
+.login-field {
+    -fx-pref-height: 40px;
+    -fx-background-color: white;
+    -fx-background-radius: 5px;
+    -fx-border-color: #e1e8ed;
+    -fx-border-radius: 5px;
+    -fx-padding: 5px 10px;
+    -fx-font-size: 14px;
+}
+
+.login-button {
+    -fx-background-color: #3498db;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 5px;
+    -fx-cursor: hand;
+    -fx-pref-height: 40px;
+    -fx-min-width: 100px;
+}
+
+.login-button:hover {
+    -fx-background-color: #2980b9;
+}
+
+.register-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: #3498db;
+    -fx-border-color: #3498db;
+    -fx-border-radius: 5px;
+    -fx-cursor: hand;
+    -fx-pref-height: 40px;
+    -fx-min-width: 100px;
+}
+
+.register-button:hover {
+    -fx-background-color: #ecf0f1;
+}
+
+.error-label {
+    -fx-text-fill: #e74c3c;
+    -fx-font-size: 14px;
+}
+
+/* Estilos para la pantalla principal */
+.post-card {
+    -fx-background-color: white;
+    -fx-background-radius: 8px;
+    -fx-border-radius: 8px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 8, 0, 0, 4);
+    -fx-padding: 15px;
+}
+
+.post-title {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2c3e50;
+}
+
+.post-author {
+    -fx-font-size: 14px;
+    -fx-text-fill: #7f8c8d;
+}
+
+.post-content {
+    -fx-font-size: 14px;
+    -fx-text-fill: #34495e;
+    -fx-wrap-text: true;
+}
+
+.tag-chip {
+    -fx-background-color: #ecf0f1;
+    -fx-background-radius: 15px;
+    -fx-padding: 5px 10px;
+    -fx-text-fill: #2980b9;
+    -fx-font-size: 12px;
+}
 .list-view, .text-area {
     -fx-background-color: #FFFFFF;
     -fx-border-color: #E1E8ED;

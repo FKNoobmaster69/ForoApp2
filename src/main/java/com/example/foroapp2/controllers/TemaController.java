@@ -9,7 +9,7 @@ import javafx.scene.control.TextField;
 public class TemaController {
 
     @FXML private ListView<Tema> temasListView;
-    @FXML private TextField nuevoTemaField;
+    @FXML private TextField      nuevoTemaField;
 
     private final TemaService temaService = new TemaService();
 
@@ -23,7 +23,7 @@ public class TemaController {
         String nombre = nuevoTemaField.getText().trim();
         if (!nombre.isEmpty()) {
             Tema t = new Tema();
-            t.setTitulo(nombre);
+            t.setNombre(nombre);
             t.setDescripcion("");
             temaService.crearTema(t);
             temasListView.getItems().setAll(temaService.listarTodos());

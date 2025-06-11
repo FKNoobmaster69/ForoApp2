@@ -2,6 +2,7 @@
 
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
 
 <BorderPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.example.foroapp2.controllers.PrincipalController"
@@ -10,18 +11,28 @@
             prefWidth="800" prefHeight="600">
 
     <top>
-        <HBox spacing="10" alignment="CENTER_LEFT" styleClass="login-field" padding="10">
-            <Label text="Bienvenido," styleClass="login-title"/>
-            <Label fx:id="welcomeLabel" styleClass="login-title"/>
-            <Region HBox.hgrow="ALWAYS"/>
-            <Button fx:id="newPostButton" text="Crear Post" styleClass="login-button"/>
-            <Button fx:id="logoutButton" text="Cerrar Sesión" styleClass="register-button"/>
+        <HBox spacing="10" alignment="CENTER_LEFT" styleClass="login-field">
+            <padding>
+                <Insets top="10" right="10" bottom="10" left="10" />
+            </padding>
+            <Label text="Bienvenido," styleClass="login-title" />
+            <Label fx:id="welcomeLabel" styleClass="login-title" />
+            <Region HBox.hgrow="ALWAYS" />
+            <Button fx:id="newPostButton" text="Crear Post" styleClass="login-button" />
+            <Button fx:id="logoutButton" text="Cerrar Sesión" styleClass="register-button" />
         </HBox>
     </top>
 
     <center>
         <ScrollPane fitToWidth="true">
-            <VBox fx:id="postContainer" spacing="15" padding="15"/>
+            <content>
+                <VBox fx:id="postContainer" spacing="15">
+                    <padding>
+                        <Insets top="15" right="15" bottom="15" left="15" />
+                    </padding>
+                </VBox>
+            </content>
         </ScrollPane>
     </center>
+
 </BorderPane>

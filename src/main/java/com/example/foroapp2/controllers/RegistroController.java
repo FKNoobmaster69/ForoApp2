@@ -6,56 +6,70 @@ import com.example.foroapp2.services.UsuarioService;
 import com.example.foroapp2.utils.SceneManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
-
-import java.time.LocalDate;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
+import java.util.HashMap;
+import java.util.Map;
 
 public class RegistroController {
 
-    @FXML private PasswordField passwordField;
     @FXML private TextField nombreField;
     @FXML private TextField emailField;
+    @FXML private PasswordField passwordField;
     @FXML private TextArea descripcionArea;
-    @FXML private TextField redesField;
-    @FXML private DatePicker fechaNacimientoPicker;
-    @FXML private ComboBox<Genero> generoComboBox;
-    @FXML private Label mensajeLabel;
+    @FXML private TextField facebookField;
+    @FXML private TextField twitterField;
+    @FXML private TextField instagramField;
+    @FXML private RadioButton hombreRadio;
+    @FXML private RadioButton mujerRadio;
+    @FXML private RadioButton otroRadio;
+    @FXML private ToggleGroup generoGroup;
 
     private final UsuarioService usuarioService = new UsuarioService();
 
     @FXML
-    public void initialize() {
-        generoComboBox.getItems().setAll(Genero.values());
-    }
-
-    @FXML
-    private void registrarUsuario(ActionEvent event) {
+    private void registrar() {
         String nombre = nombreField.getText().trim();
-        String password = passwordField.getText();
         String email = emailField.getText().trim();
-        Genero genero = generoComboBox.getValue();
-        LocalDate fechaNacimiento = fechaNacimientoPicker.getValue();
+        String password = passwordField.getText();
+        Genero generoSel = obtenerGeneroSeleccionado();
+        if (nombre.isBlank() || email.isBlank() || password.isBlank()) return;
 
-        if (nombre.isEmpty() || password.isEmpty() || email.isEmpty() || genero == null || fechaNacimiento == null) {
-            mensajeLabel.setText("Completa todos los campos obligatorios.");
-            return;
-        }
+        Usuario usuario = new Usuario(nombre, email, password, generoSel);
+        usuario.setDescripcion(descripcionArea.getText());
 
-        Usuario usuario = new Usuario();
-        usuario.setNombre(nombre);
-        usuario.setContrasena(password);
-        usuario.setEmail(email);
-        usuario.setDescripcion(descripcionArea.getText().trim());
-        usuario.setRedesSociales(redesField.getText().trim());
-        usuario.setGenero(genero);
-        usuario.setFechaNacimiento(fechaNacimiento);
+        Map<String, String> redes = new HashMap<>();
+        if (!facebookField.getText().isBlank()) redes.put("facebook", facebookField.getText().trim());
+        if (!twitterField.getText().isBlank()) redes.put("twitter", twitterField.getText().trim());
+        if (!instagramField.getText().isBlank()) redes.put("instagram", instagramField.getText().trim());
+        usuario.setRedesSociales(redes);
 
         usuarioService.registrar(usuario);
-        SceneManager.cambiarEscena("login.fxml");
+        limpiarFormulario();
     }
 
     @FXML
     private void volverLogin(ActionEvent event) {
-        SceneManager.cambiarEscena("login.fxml");
+        SceneManager.cambiarEscena("/com/example/foroapp2/login.fxml");
+    }
+
+    private Genero obtenerGeneroSeleccionado() {
+        if (hombreRadio.isSelected()) return Genero.MASCULINO;
+        if (mujerRadio.isSelected()) return Genero.FEMENINO;
+        return Genero.NO_ESPECIFICADO;
+    }
+
+    private void limpiarFormulario() {
+        nombreField.clear();
+        emailField.clear();
+        passwordField.clear();
+        descripcionArea.clear();
+        facebookField.clear();
+        twitterField.clear();
+        instagramField.clear();
+        generoGroup.selectToggle(null);
     }
 }

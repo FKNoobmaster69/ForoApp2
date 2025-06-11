@@ -1,76 +1,43 @@
 package com.example.foroapp2.repositories;
 
 import com.example.foroapp2.models.Tag;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.example.foroapp2.utils.JsonFileUtils;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 public class TagRepository {
-    private static final String RUTA_JSON = "data/tags.json";
-    private final ObjectMapper mapper = new ObjectMapper();
-    private final Map<Long, Tag> tags = new HashMap<>();
-    private long ultimoId = 0;
 
-    public TagRepository() {
-        cargar();
-    }
-
-    private void cargar() {
-        try {
-            File archivo = new File(RUTA_JSON);
-            if (archivo.exists()) {
-                List<Tag> lista = mapper.readValue(archivo, new TypeReference<List<Tag>>() {
-                });
-                for (Tag tag : lista) {
-                    tags.put(tag.getId(), tag);
-                    if (tag.getId() > ultimoId) ultimoId = tag.getId();
-                }
-            }
-        } catch (IOException e) {
-            throw new RuntimeException("Error al cargar los tags", e);
-        }
-    }
-
-    private void guardar() {
-        try {
-            mapper.writerWithDefaultPrettyPrinter().writeValue(new File(RUTA_JSON), tags.values());
-        } catch (IOException e) {
-            throw new RuntimeException("Error al guardar los tags", e);
-        }
-    }
+    private final String filePath = "data/tags.json";
 
     public List<Tag> listarTodos() {
-        return new ArrayList<>(tags.values());
+        return JsonFileUtils
+                .cargarDesdeArchivo(filePath, Tag[].class)
+                .map(List::of)
+                .orElse(new ArrayList<>());
     }
 
     public Optional<Tag> buscarPorId(long id) {
-        return Optional.ofNullable(tags.get(id));
-    }
-
-    public Optional<Tag> buscarPorNombre(String nombre) {
-        return tags.values().stream()
-                .filter(t -> t.getNombre().equalsIgnoreCase(nombre))
+        return listarTodos()
+                .stream()
+                .filter(t -> t.getId() == id)
                 .findFirst();
     }
 
     public void guardar(Tag tag) {
-        if (tag.getId() == 0) {
-            tag.setId(++ultimoId);
+        synchronized (this) {
+            List<Tag> tags = listarTodos();
+            tag.setId(generarNuevoId(tags));
+            tags.add(tag);
+            JsonFileUtils.guardarEnArchivo(filePath, tags);
         }
-        tags.put(tag.getId(), tag);
-        guardar();
     }
 
-    public void actualizar(Tag tag) {
-        tags.put(tag.getId(), tag);
-        guardar();
-    }
-
-    public void eliminar(long id) {
-        tags.remove(id);
-        guardar();
+    private long generarNuevoId(List<Tag> tags) {
+        return tags.stream()
+                   .mapToLong(t -> t.getId() != null ? t.getId() : 0)
+                   .max()
+                   .orElse(0) + 1;
     }
 }

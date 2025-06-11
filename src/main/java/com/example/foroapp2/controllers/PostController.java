@@ -7,16 +7,24 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 
+/**
+ * Controlador encargado de mostrar y calificar un post.
+ */
 public class PostController {
 
-    @FXML private Label tituloLabel;
-    @FXML private Label autorLabel;
+    /* --------- Componentes de la vista --------- */
+    @FXML private Label    tituloLabel;
+    @FXML private Label    autorLabel;
     @FXML private TextArea contenidoArea;
-    @FXML private Button likeButton;
-    @FXML private Button dislikeButton;
+    @FXML private Button   likeButton;
+    @FXML private Button   dislikeButton;
+
 
     private final PostService postService = new PostService();
+
+
     private Post post;
+
 
     public void setPost(Post post) {
         this.post = post;
@@ -24,6 +32,7 @@ public class PostController {
         autorLabel.setText(post.getAutor().getNombre());
         contenidoArea.setText(post.getContenido());
     }
+
 
     @FXML
     private void like() {

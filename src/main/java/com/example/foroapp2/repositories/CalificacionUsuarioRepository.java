@@ -1,81 +1,32 @@
 package com.example.foroapp2.repositories;
 
 import com.example.foroapp2.models.CalificacionUsuario;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.*;
+import com.example.foroapp2.utils.JsonFileUtils;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 public class CalificacionUsuarioRepository {
-    private static final String RUTA_JSON = "data/calificaciones_usuarios.json";
-    private final ObjectMapper mapper = new ObjectMapper();
-    private final Map<Long, CalificacionUsuario> calificaciones = new HashMap<>();
-    private long ultimoId = 0;
-
-    public CalificacionUsuarioRepository() {
-        cargar();
-    }
-
-    private void cargar() {
-        try {
-            File archivo = new File(RUTA_JSON);
-            if (archivo.exists()) {
-                List<CalificacionUsuario> lista = mapper.readValue(archivo, new TypeReference<List<CalificacionUsuario>>() {});
-                for (CalificacionUsuario calificacion : lista) {
-                    calificaciones.put(calificacion.getId(), calificacion);
-                    if (calificacion.getId() > ultimoId) {
-                        ultimoId = calificacion.getId();
-                    }
-                }
-            }
-        } catch (IOException e) {
-            throw new RuntimeException("Error al cargar calificaciones", e);
-        }
-    }
-
-    private void guardar() {
-        try {
-            mapper.writerWithDefaultPrettyPrinter().writeValue(new File(RUTA_JSON), calificaciones.values());
-        } catch (IOException e) {
-            throw new RuntimeException("Error al guardar calificaciones", e);
-        }
-    }
+    private final String filePath = "data/calificaciones_usuario.json";
 
     public List<CalificacionUsuario> listarTodos() {
-        return new ArrayList<>(calificaciones.values());
+        return JsonFileUtils.cargarDesdeArchivo(filePath, CalificacionUsuario[].class).map(List::of).orElse(new ArrayList<>());
     }
 
     public Optional<CalificacionUsuario> buscarPorId(long id) {
-        return Optional.ofNullable(calificaciones.get(id));
-    }
-
-    public List<CalificacionUsuario> buscarPorUsuario(long usuarioId) {
-        List<CalificacionUsuario> resultado = new ArrayList<>();
-        for (CalificacionUsuario c : calificaciones.values()) {
-            if (c.getUsuario().getId() == usuarioId) {
-                resultado.add(c);
-            }
-        }
-        return resultado;
+        return listarTodos().stream().filter(c -> c.getId() == id).findFirst();
     }
 
     public void guardar(CalificacionUsuario calificacion) {
-        if (calificacion.getId() == 0) {
-            calificacion.setId(++ultimoId);
+        synchronized (this) {
+            List<CalificacionUsuario> calificaciones = listarTodos();
+            calificacion.setId(generarNuevoId(calificaciones));
+            calificaciones.add(calificacion);
+            JsonFileUtils.guardarEnArchivo(filePath, calificaciones);
         }
-        calificaciones.put(calificacion.getId(), calificacion);
-        guardar();
     }
 
-    public void actualizar(CalificacionUsuario calificacion) {
-        calificaciones.put(calificacion.getId(), calificacion);
-        guardar();
-    }
-
-    public void eliminar(long id) {
-        calificaciones.remove(id);
-        guardar();
+    private long generarNuevoId(List<CalificacionUsuario> calificaciones) {
+        return calificaciones.stream().mapToLong(CalificacionUsuario::getId).max().orElse(0) + 1;
     }
 }

@@ -1,26 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.example.foroapp2.controllers.LoginController"
-            stylesheets="@/styles/estilos.css"
-            prefWidth="400" prefHeight="500"
-            styleClass="login-root">
+<VBox fx:controller="com.example.foroapp2.controllers.LoginController"
+      xmlns="http://javafx.com/javafx/22.0.2"
+      xmlns:fx="http://javafx.com/fxml"
+      alignment="CENTER" spacing="10" prefWidth="400" prefHeight="500">
 
-    <VBox spacing="20" alignment="CENTER"
-          AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0"
-          AnchorPane.topAnchor="80" AnchorPane.bottomAnchor="80">
+    <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
 
-        <Label text="ForoApp" styleClass="login-title"/>
+    <Label text="Iniciar sesión" style="-fx-font-size: 20px;"/>
 
-        <TextField fx:id="usernameField" promptText="Nombre de usuario" styleClass="login-field"/>
-        <PasswordField fx:id="passwordField" promptText="Contraseña" styleClass="login-field"/>
+    <TextField fx:id="emailField" promptText="Correo electrónico"/>
+    <PasswordField fx:id="passwordField" promptText="Contraseña"/>
 
-        <Label fx:id="errorLabel" styleClass="error-label"/>
+    <Button text="Entrar" onAction="#iniciarSesion" maxWidth="200"/>
+    <Button text="Crear cuenta" onAction="#irARegistro" maxWidth="200"/>
 
-        <Button text="Iniciar sesión" onAction="#handleLogin" styleClass="login-button"/>
-        <Button text="Registrarse" onAction="#handleRegistro" styleClass="register-button"/>
-    </VBox>
-</AnchorPane>
+    <Label fx:id="mensajeErrorLabel" textFill="red"/>
+</VBox>

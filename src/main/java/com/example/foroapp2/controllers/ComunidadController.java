@@ -9,13 +9,13 @@ import javafx.scene.control.TextField;
 public class ComunidadController {
 
     @FXML private ListView<Comunidad> comunidadesListView;
-    @FXML private TextField nuevaComunidadField;
+    @FXML private TextField           nuevaComunidadField;
 
     private final ComunidadService comunidadService = new ComunidadService();
 
     @FXML
     public void initialize() {
-        comunidadesListView.getItems().setAll(comunidadService.listarTodos());
+        comunidadesListView.getItems().setAll(comunidadService.listarTodas());
     }
 
     @FXML
@@ -25,7 +25,7 @@ public class ComunidadController {
             Comunidad c = new Comunidad();
             c.setNombre(nombre);
             comunidadService.crearComunidad(c);
-            comunidadesListView.getItems().setAll(comunidadService.listarTodos());
+            comunidadesListView.getItems().setAll(comunidadService.listarTodas());
             nuevaComunidadField.clear();
         }
     }

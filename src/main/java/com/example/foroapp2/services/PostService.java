@@ -5,44 +5,51 @@ import com.example.foroapp2.repositories.PostRepository;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class PostService {
+
     private final PostRepository repository = new PostRepository();
 
     public List<Post> listarTodos() {
         return repository.listarTodos();
     }
 
-    public List<Post> listarPorComunidad(Long comunidadId) {
-        return repository.listarPorComunidad(comunidadId);
+    public List<Post> listarPorComunidad(long comunidadId) {
+        return repository.listarTodos()
+                         .stream()
+                         .filter(p -> p.getComunidad() != null
+                                   && p.getComunidad().getId() != null
+                                   && p.getComunidad().getId() == comunidadId)
+                         .collect(Collectors.toList());
     }
 
     public Optional<Post> buscarPorId(long id) {
         return repository.buscarPorId(id);
     }
 
-    public void guardar(Post post) {
+    public void crearPost(Post post) {
         repository.guardar(post);
     }
 
-    public void eliminar(long id) {
-        repository.eliminar(id);
-    }
-
-    public void actualizar(Post post) {
+    public void actualizarPost(Post post) {
         repository.actualizar(post);
     }
 
+    public boolean eliminarPost(long id) {
+        return repository.eliminar(id);
+    }
+
+    /* ==== nueva funcionalidad de calificación ============================================ */
+
     public void calificar(long postId, boolean positivo) {
-        Optional<Post> opt = buscarPorId(postId);
-        if (opt.isPresent()) {
-            Post p = opt.get();
+        buscarPorId(postId).ifPresent(post -> {
             if (positivo) {
-                p.setLikes(p.getLikes() + 1);
+                post.setLikes(post.getLikes() + 1);
             } else {
-                p.setDislikes(p.getDislikes() + 1);
+                post.setDislikes(post.getDislikes() + 1);
             }
-            actualizar(p);
-        }
+            repository.actualizar(post);
+        });
     }
 }

@@ -1,25 +1,27 @@
 package com.example.foroapp2.repositories;
 
 import com.example.foroapp2.models.TipoCalificacion;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
 public class TipoCalificacionRepository {
-    private final List<TipoCalificacion> tipos = List.of(TipoCalificacion.values());
 
     public List<TipoCalificacion> listarTodos() {
-        return tipos;
+        return Arrays.asList(TipoCalificacion.values());
     }
 
-    public Optional<TipoCalificacion> buscarPorOrdinal(int ordinal) {
-        return tipos.stream()
-                .filter(t -> t.ordinal() == ordinal)
+    public Optional<TipoCalificacion> buscarPorId(long puntuacion) {
+        return listarTodos().stream()
+                .filter(t -> t.getPuntuacion() == puntuacion)
                 .findFirst();
     }
 
     public Optional<TipoCalificacion> buscarPorNombre(String nombre) {
-        return tipos.stream()
-                .filter(t -> t.name().equalsIgnoreCase(nombre))
-                .findFirst();
+        try {
+            return Optional.of(TipoCalificacion.valueOf(nombre));
+        } catch (IllegalArgumentException e) {
+            return Optional.empty();
+        }
     }
 }
